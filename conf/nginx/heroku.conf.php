@@ -50,13 +50,25 @@ http {
         # FIXME: breaks redirects with foreman
         port_in_redirect off;
         
-        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>";
+        root "<?=getenv('YII_ROOT')?:'/app//web'?>;
         
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
         
         include "<?=getenv('HEROKU_PHP_NGINX_CONFIG_INCLUDE')?>";
         
+		location /acp {
+			try_files $uri $uri/ /acp.php?$args;
+		}
+
+		location / {
+			try_files $uri $uri/ /index.php?$args;
+		}
+
+		location ~ acp.php$ {
+			deny all;
+		}
+		
         # restrict access to hidden files, just in case
         location ~ /\. {
             deny all;
