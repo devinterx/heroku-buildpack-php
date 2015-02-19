@@ -11,7 +11,3 @@ location / {
 location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
     deny all;
 }
-
-location ~ acp.php$ {
-	deny all;
-}
