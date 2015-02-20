@@ -1,5 +1,5 @@
 location / {
-    index index.html index.php;
+    index index.html index.php; 
 	try_files $uri $uri/ /index.php?$args;
 }
 
